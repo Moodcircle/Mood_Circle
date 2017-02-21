@@ -1,7 +1,7 @@
-## Mood Circle
+## 
 
-Typical Git Work Flow
 
+## Typical Github Work Flow  
 #### 1. Get the latest code  
 ```
 git pull origin master
