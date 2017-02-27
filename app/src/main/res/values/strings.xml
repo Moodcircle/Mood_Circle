@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mood Circle</string>
+    <string name="app_name">Mhealth_moodcircle</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <!-- Strings for the BINARY screen. -->
     <string name="binary_message_morning">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how positive and negative have you felt this morning?</string>
     <string name="binary_message_afternoon">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how positive and negative have you felt this afternoon?</string>
@@ -25,4 +26,5 @@
     <string name="ratings_message_evening">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how strongly have you felt each of the following this evening?</string>
     <string name="ratings_message_night">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how strongly have you felt each of the following tonight?</string>
 
+    <string name="action_settings">Settings</string>
 </resources>
