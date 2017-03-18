@@ -1,14 +1,16 @@
-package eecs395_495.mhealth_moodcircle;
+package PassiveDataHelper;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import DBHelper.SMSSender;
+import DBHelper.SurveyDBHelper;
 
 /**
  * Created by 51375 on 2017/2/10.
@@ -36,9 +38,11 @@ public class SMS_Tracker {
 //        LoaderManager
 //        context.CursorLoader(c);
         int totalSMS = c.getCount();
-
+        long timeStamp= (long) 1488486695949.0;
         if (c.moveToFirst()) {
-            for (int i = 0; i < 30; i++) {
+//            for (int i = 0; i < 30; i++)
+            while(Double.parseDouble(c.getString(c.getColumnIndex("date")))>timeStamp)
+            {
 
                 objSms = new Sms();
                 objSms.setId(c.getString(c.getColumnIndexOrThrow("_id")));
@@ -67,6 +71,6 @@ public class SMS_Tracker {
     }
 
     public static void sendDatatoBackend(Context context){
-        new Replicator(context).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+        new SMSSender(context).execute();
     }
 }

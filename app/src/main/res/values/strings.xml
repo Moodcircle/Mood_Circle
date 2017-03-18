@@ -26,5 +26,19 @@
     <string name="ratings_message_evening">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how strongly have you felt each of the following this evening?</string>
     <string name="ratings_message_night">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how strongly have you felt each of the following tonight?</string>
 
+    <!-- Strings for FRIENDS WORDS screen. -->
+    <string name="friends_words_day">Select each word that describes how you think your friend has felt today.</string>
+    <!-- Strings for SENTENCES screen. -->
+    <string name="sentences_message_morning">How have you felt this morning? Why?</string>
+    <string name="sentences_message_afternoon">How have you felt this afternoon? Why?</string>
+    <string name="sentences_message_evening">How have you felt this evening? Why?</string>
+    <string name="sentences_message_night">How have you felt tonight? Why?</string>
+    <!-- Strings for FRIEND ASSESSMENT screen. -->
+    <string name = "friend_positive_negative">On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how positive and negative do you think your friend felt today?</string>
+    <string name = "friend_words">Select each word you think your friend seemed today</string>
+
+    <!-- Strings for FRIENDS ASSESSMENT screen. -->
+    <string name = "friend_inperson"> Have you interacted with your friend in person today?</string>
+    <string name = "friends_confidence"> On a scale of 0 (NOT AT ALL) to 5 (VERY MUCH), how confident are you about your assessment of your friend?</string>
     <string name="action_settings">Settings</string>
 </resources>

@@ -1,4 +1,4 @@
-package eecs395_495.mhealth_moodcircle;
+package PassiveDataHelper;
 
 import android.Manifest;
 import android.content.Context;
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import DBHelper.SurveyDBHelper;
+
 /**
  * Created by 51375 on 2017/2/16.
  */
@@ -20,25 +22,26 @@ public class Call_LogHelper {
     String calllog;
     Call_Log clog;
     List<Call_Log> call_logList;
+
     public String getCall_Log() {
         return calllog;
     }
 
     public void getCallDetails(Context context) {
         StringBuffer sb = new StringBuffer();
-        List<Call_Log> tempCallLogList=new ArrayList<Call_Log>();
-        Call_Log tempCalllog=new Call_Log();
+        List<Call_Log> tempCallLogList = new ArrayList<Call_Log>();
+        Call_Log tempCalllog = new Call_Log();
 
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
+//        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+//            // TODO: Consider calling
+//            //    ActivityCompat#requestPermissions
+//            // here to request the missing permissions, and then overriding
+//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//            //                                          int[] grantResults)
+//            // to handle the case where the user grants the permission. See the documentation
+//            // for ActivityCompat#requestPermissions for more details.
+//            return;
+//        }
         Cursor managedCursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
         int number = managedCursor.getColumnIndex(CallLog.Calls.NUMBER);
         int type = managedCursor.getColumnIndex(CallLog.Calls.TYPE);
@@ -46,7 +49,7 @@ public class Call_LogHelper {
         int duration = managedCursor.getColumnIndex(CallLog.Calls.DURATION);
         sb.append("Call Details :");
         managedCursor.moveToNext();
-        for(int i=0;i<25;i++) {
+        for (int i = 0; i < 25; i++) {
             if (managedCursor.moveToNext()) {
                 String phNumber = managedCursor.getString(number);
                 String callType = managedCursor.getString(type);
@@ -83,11 +86,11 @@ public class Call_LogHelper {
             }
         }
         managedCursor.close();
-        calllog=sb.toString();
-        call_logList=tempCallLogList;
-
+        if (sb != null) {
+            calllog = sb.toString();
+            call_logList = tempCallLogList;
+        }
     }
-
 
 
 }

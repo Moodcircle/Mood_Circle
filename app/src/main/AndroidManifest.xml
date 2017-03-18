@@ -30,6 +30,9 @@
         <activity android:name="moodcircle_interface.MoodBinary"/>
         <activity android:name="moodcircle_interface.MoodRatings"/>
         <activity android:name="moodcircle_interface.SurveyActivity"/>
+        <activity android:name="moodcircle_interface.MoodFriendCircle" />
+        <activity android:name="moodcircle_interface.MoodFriendAssessment" />
+        <activity android:name="moodcircle_interface.MoodSentences" />
 
     </application>
 

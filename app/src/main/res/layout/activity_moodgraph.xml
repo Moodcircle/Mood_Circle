@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:text="Current Mood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="59dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginBottom="44dp"
+        android:id="@+id/currentmood" />
+
+    <Button
+        android:text="Word Cloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
+        android:id="@+id/wordcloud"
+        android:layout_alignBaseline="@+id/currentmood"
+        android:layout_alignBottom="@+id/currentmood"
+        android:layout_toRightOf="@+id/currentmood"
+        android:layout_toEndOf="@+id/currentmood" />
+
+    <TextView
+        android:text="Stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:textSize="25dp"
+        android:id="@+id/stats"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/stats"
+        android:layout_alignLeft="@+id/currentmood"
+        android:layout_alignStart="@+id/currentmood"
+        android:id="@+id/weeklymood" />
+
+    <Button
+        android:text="Year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/monthlymood"
+        android:layout_toRightOf="@+id/monthlymood"
+        android:layout_toEndOf="@+id/monthlymood"
+        android:id="@+id/yearlymood" />
+
+    <Button
+        android:text="Month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/monthlymood"
+        android:layout_below="@+id/stats"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

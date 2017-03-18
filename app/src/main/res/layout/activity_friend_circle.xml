@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    android:id="@+id/activity_friend_circle"
+    >
+
+
+    <Button
+        android:text="Me"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="196dp"
+        android:id="@+id/mypage"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:onClick="gotoMySurveyPage"
+        />
+
+    <Button
+        android:text="Friend 1"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="12dp"
+        android:layout_marginTop="64dp"
+        android:id="@+id/friend1"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/friend4"
+        android:layout_toEndOf="@+id/friend4"
+        android:onClick="gotoFriendAssessment"/>
+
+    <Button
+        android:text="Friend 3"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="12dp"
+        android:id="@+id/friend3"
+        android:layout_marginTop="68dp"
+        android:layout_below="@+id/mypage"
+        android:layout_toRightOf="@+id/friend1"
+        android:layout_toEndOf="@+id/friend1"
+        android:onClick="gotoFriendAssessment"/>
+
+    <Button
+        android:text="Friend 2"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="12dp"
+        android:id="@+id/friend2"
+        android:layout_marginRight="33dp"
+        android:layout_marginEnd="33dp"
+        android:layout_alignBottom="@+id/friend5"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="gotoFriendAssessment"/>
+
+    <Button
+        android:text="Friend 5"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:textSize="12dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/friend5"
+        android:layout_marginLeft="26dp"
+        android:layout_marginStart="26dp"
+        android:layout_alignTop="@+id/mypage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="gotoFriendAssessment"/>
+
+    <Button
+        android:text="Friend 4"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="12dp"
+        android:id="@+id/friend4"
+        android:layout_marginRight="13dp"
+        android:layout_marginEnd="13dp"
+        android:layout_alignBaseline="@+id/friend3"
+        android:layout_alignBottom="@+id/friend3"
+        android:layout_toLeftOf="@+id/mypage"
+        android:layout_toStartOf="@+id/mypage" />
+
+    <TextView
+        android:text="My Friend Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/friend5"
+        android:layout_alignStart="@+id/friend5"
+        android:layout_marginTop="17dp"
+        android:id="@+id/textView" />
+
+</RelativeLayout>

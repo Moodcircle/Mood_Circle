@@ -2,6 +2,7 @@ package eecs395_495.mhealth_moodcircle;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -21,9 +22,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 
-import moodcircle_interface.SurveyActivity;
+import DBHelper.CalllogSender;
+import PassiveDataHelper.Call_LogHelper;
+import PassiveDataHelper.GPSTracker;
+import PassiveDataHelper.SMS_Tracker;
+import PassiveDataHelper.Sms;
+import moodcircle_interface.MoodFriendCircle;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,6 +40,8 @@ public class MainActivity extends AppCompatActivity
 
     ContentResolver cr;
 
+    double latitude;
+    double longitude;
     String TAG = "MainActivity";
 
     @Override
@@ -69,8 +76,19 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
+        GPSTracker gps = new GPSTracker(this);
+        if (gps.canGetLocation()) {
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+            Log.v("location", String.valueOf(latitude));
+//                float size= (float) 15.0;
+//                Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            SharedPreferences sharedPreferences = getSharedPreferences("survey", MODE_ENABLE_WRITE_AHEAD_LOGGING);
+            SharedPreferences.Editor locationEditor = sharedPreferences.edit();
+            locationEditor.putFloat("latitude", (float) latitude);
+            locationEditor.putFloat("longitude", (float) longitude);
+            locationEditor.commit();
+        }
     }
 
     @Override
@@ -79,7 +97,9 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+//            super.onBackPressed();
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            MainActivity.this.startActivity(intent);
         }
     }
 
@@ -112,81 +132,72 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_location) {
-            new Replicator(this.getBaseContext()).executeOnExecutor(Executors.newCachedThreadPool());
+//            new SMSSender(this.getBaseContext()).executeOnExecutor(Executors.newCachedThreadPool());
             // Handle the location actions
-            GPSTracker gps = new GPSTracker(this);
+
 //            TextView textView = (TextView) findViewById(locate);
             location.setVisibility(View.INVISIBLE);
             hello.setVisibility(View.INVISIBLE);
             call_log.setVisibility(View.INVISIBLE);
             recognize.setVisibility(View.INVISIBLE);
 
-            if (gps.canGetLocation()) {
-                double latitude = gps.getLatitude();
-                double longitude = gps.getLongitude();
-                Log.v("location", String.valueOf(latitude));
-//                float size= (float) 15.0;
-//                Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
 
                 String[] location_arr = {"\n\n\nYour location is:\n Latitude:" + String.valueOf(latitude), "longitude:" + String.valueOf(longitude)};
                 location.setText("Your location is - Latitude:" + latitude + "\nLongitude: " + longitude);
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, location_arr);
                 location_View.setAdapter(arrayAdapter);
                 location_View.setVisibility(View.VISIBLE);
-                SendData s1=new SendData(this);
-                Thread t1=new Thread(s1);
-                t1.start();
+//                SendData s1=new SendData(this);
+//                Thread t1=new Thread(s1);
+//                t1.start();
 //                location.setTextSize(size);
-            } else {
-                return false;
-            }
+
         } else if (id == R.id.nav_Calllog) {
             //CALL_LOG
 
             Call_LogHelper call_logHelper = new Call_LogHelper();
             call_logHelper.getCallDetails(this);
-
-//            String[] callDetails = new String[5];
-//            callDetails[0] = "\n\n\n";
-//            callDetails[1] = call_logHelper.getCall_Log();
-//            ArrayAdapter<String> callAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, callDetails);
-//            location_View.setAdapter(callAdapter);
-//            location_View.setVisibility(View.VISIBLE);
+            new CalllogSender(this).execute();
+            String[] callDetails = new String[5];
+            callDetails[0] = "\n\n\n";
+            callDetails[1] = call_logHelper.getCall_Log();
+            ArrayAdapter<String> callAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, callDetails);
+            location_View.setAdapter(callAdapter);
+            location_View.setVisibility(View.VISIBLE);
 
         } else if (id == R.id.nav_smsMessage) {
-                    Log.v("smms","text");
-                    List<Sms> msg = new ArrayList<>();
+            Log.v("smms", "text");
+            List<Sms> msg = new ArrayList<>();
 //            msg = this.getAllSms();
-                    SMS_Tracker sms_tracker = new SMS_Tracker();
-                    sms_tracker.getAllSms(MainActivity.this);
-                    msg = sms_tracker.getSmsList();
-                    StringBuffer sb = new StringBuffer("");
-                    SMS_Tracker.sendDatatoBackend(this);
-                    SendData s1=new SendData(this);
-                    Thread t1=new Thread(s1);
-                    t1.start();
-//                    Iterator<Sms> msgIterator = msg.iterator();
-//                    while (msgIterator.hasNext()) {
-//                        sb.append(msgIterator.next().getWholeMsg());
-//                        sb.append("\n-------");
-//                    }
-//                    String[] smsMsg = new String[5];
-//                    smsMsg[0] = "\n\n\n";
-//                    smsMsg[1] = sb.toString();
-//                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, smsMsg);
-//                    location_View.setAdapter(arrayAdapter);
-//                    location_View.setVisibility(View.VISIBLE);
+            SMS_Tracker sms_tracker = new SMS_Tracker();
+            sms_tracker.getAllSms(MainActivity.this);
+            msg = sms_tracker.getSmsList();
+            StringBuffer sb = new StringBuffer("");
+            SMS_Tracker.sendDatatoBackend(this);
 
-        }
+//            Iterator<Sms> msgIterator = msg.iterator();
+//            while (msgIterator.hasNext()) {
+//                sb.append(msgIterator.next().getWholeMsg());
+//                sb.append("\n-------");
+//            }
+//            String[] smsMsg = new String[5];
+//            smsMsg[0] = "\n\n\n";
+//            if (sb != null)
+//                smsMsg[1] = sb.toString();
+//            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, smsMsg);
+//            location_View.setAdapter(arrayAdapter);
+//            location_View.setVisibility(View.VISIBLE);
 
-         else if (id == R.id.nav_questionnaire) {
+        } else if (id == R.id.nav_questionnaire) {
             location_View.setVisibility(View.INVISIBLE);
-            Intent intent = new Intent(MainActivity.this, SurveyActivity.class);
+//            Intent intent = new Intent(MainActivity.this, SurveyActivity.class);
+//            MainActivity.this.startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, MoodFriendCircle.class);
             MainActivity.this.startActivity(intent);
 
-
         } else if (id == R.id.nav_share) {
-
+            Intent intent = new Intent(MainActivity.this, MoodFriendCircle.class);
+            MainActivity.this.startActivity(intent);
         } else if (id == R.id.nav_send) {
 
         }
@@ -197,6 +208,9 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    public void sendMessage() {
+
+    }
 }
 
 

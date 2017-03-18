@@ -35,32 +35,32 @@
             <Button
                 android:text="Happy"
                 android:id="@+id/words_button_happy"
-                android:onClick="toggleWordsResponse"/>
+                android:onClick="toggleWordsResponseHappy"/>
 
             <Button
                 android:text="Grateful"
                 android:id="@+id/words_button_grateful"
-                android:onClick="toggleWordsResponse"/>
+                android:onClick="toggleWordsResponseGrateful"/>
 
             <Button
                 android:text="Content"
                 android:id="@+id/words_button_content"
-                android:onClick="toggleWordsResponse"/>
+                android:onClick="toggleWordsResponseContent"/>
 
             <Button
                 android:text="Enthusiastic"
                 android:id="@+id/words_button_enthusiastic"
-                android:onClick="toggleWordsResponse"/>
+                android:onClick="toggleWordsResponseEnthusiastic"/>
 
             <Button
                 android:text="Inspired"
                 android:id="@+id/words_button_inspired"
-                android:onClick="toggleWordsResponse"/>
+                android:onClick="toggleWordsResponseInspired"/>
 
             <Button
                 android:text="Proud"
                 android:id="@+id/words_button_proud"
-                android:onClick="toggleWordsResponse"/>
+                android:onClick="toggleWordsResponseProud"/>
 
         </GridLayout>
 
@@ -82,33 +82,34 @@
 
             <Button
                 android:text="Guilty"
+
                 android:id="@+id/words_button_guilty"
-                android:onClick="toggleWordsResponse"/>
+                android:onClick="toggleWordsResponseGuilty"/>
 
             <Button
                 android:text="Anxious"
                 android:id="@+id/words_button_anxious"
-                android:onClick="toggleWordsResponse"/>
+                android:onClick="toggleWordsResponseAnxious"/>
 
             <Button
                 android:text="Bored"
                 android:id="@+id/words_button_bored"
-                android:onClick="toggleWordsResponse"/>
+                android:onClick="toggleWordsResponseBored"/>
 
             <Button
                 android:text="Fearful"
                 android:id="@+id/words_button_fearful"
-                android:onClick="toggleWordsResponse"/>
+                android:onClick="toggleWordsResponseFearful"/>
 
             <Button
                 android:text="Angry"
                 android:id="@+id/words_button_angry"
-                android:onClick="toggleWordsResponse"/>
+                android:onClick="toggleWordsResponseAngry"/>
 
             <Button
                 android:text="Sad"
                 android:id="@+id/words_button_sad"
-                android:onClick="toggleWordsResponse"/>
+                android:onClick="toggleWordsResponseSad"/>
 
         </GridLayout>
 
